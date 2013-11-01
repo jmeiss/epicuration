@@ -3,10 +3,10 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
   respond_to :json
   
   def create
-    user = User.new user_params
+    user = User.new safe_params
 
     if user.save
-      render json: user.as_json(auth_token: user.authentication_token, email: user.email), status: 201
+      render json: user.as_json(email: user.email, password: user.password), status: 201
       return
     else
       warden.custom_failure!
@@ -17,7 +17,7 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
 
 private
 
-  def user_params
+  def safe_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
