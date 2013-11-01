@@ -1,11 +1,15 @@
 'use strict';
 
-angular.module('frontApp', [])
+angular.module('frontApp', ['ngRoute', 'SessionService'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl'
+      })
+      .when('/login', {
+        templateUrl: 'views/users/login.html',
+        controller: 'LoginCtrl'
       })
       .otherwise({
         redirectTo: '/'

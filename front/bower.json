@@ -1,5 +1,5 @@
 {
-  "name": "front",
+  "name": "Epicuration front",
   "version": "0.0.0",
   "dependencies": {
     "bower-unstable-angular-complete": "https://github.com/ryanzec/bower-unstable-angular-complete.git#1.2.0rc3",
