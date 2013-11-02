@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('frontApp', ['ngRoute', 'SessionService'])
+angular.module('frontApp', ['ngRoute', 'ngResource'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
