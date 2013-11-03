@@ -23,20 +23,20 @@ module.exports = function (grunt) {
       dist: 'dist'
     },
     watch: {
-      coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-        tasks: ['coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/{,*/}*.coffee'],
-        tasks: ['coffee:test']
-      },
+      // coffee: {
+      //   files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+      //   tasks: ['coffee:dist']
+      // },
+      // coffeeTest: {
+      //   files: ['test/spec/{,*/}*.coffee'],
+      //   tasks: ['coffee:test']
+      // },
       compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+        files: ['<%= yeoman.app %>/styles/**/*.css'],
         tasks: ['copy:styles', 'autoprefixer']
       },
       livereload: {
@@ -44,10 +44,10 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/**/*.html',
+          '.tmp/styles/**/*.css',
+          '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
+          '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -132,30 +132,30 @@ module.exports = function (grunt) {
         '<%= yeoman.app %>/scripts/{,*/}*.js'
       ]
     },
-    coffee: {
-      options: {
-        sourceMap: true,
-        sourceRoot: ''
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
-        }]
-      }
-    },
+    // coffee: {
+    //   options: {
+    //     sourceMap: true,
+    //     sourceRoot: ''
+    //   },
+    //   dist: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: '<%= yeoman.app %>/scripts',
+    //       src: '{,*/}*.coffee',
+    //       dest: '.tmp/scripts',
+    //       ext: '.js'
+    //     }]
+    //   },
+    //   test: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: 'test/spec',
+    //       src: '{,*/}*.coffee',
+    //       dest: '.tmp/spec',
+    //       ext: '.js'
+    //     }]
+    //   }
+    // },
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
@@ -294,17 +294,17 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'coffee:dist',
+        // 'coffee:dist',
         'compass:server',
         'copy:styles'
       ],
       test: [
-        'coffee',
+        // 'coffee',
         'compass',
         'copy:styles'
       ],
       dist: [
-        'coffee',
+        // 'coffee',
         'compass:dist',
         'copy:styles',
         'imagemin',
