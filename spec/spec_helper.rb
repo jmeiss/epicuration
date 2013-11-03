@@ -51,6 +51,8 @@ Spork.prefork do
     config.order = 'random'
 
     config.include ApiHelpers, type: :request
+    config.include Devise::TestHelpers, type: :controller
+    config.extend ControllerMacros, type: :controller
   end
 
 end

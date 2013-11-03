@@ -1,40 +1,35 @@
 class Api::V1::SessionsController < DeviseController
 
   prepend_before_filter :require_no_authentication, only: :create
-  before_filter :ensure_params_exist
   respond_to :json
 
   def create
-    resource = User.find_for_database_authentication email: params[:user][:email]
+    resource = User.find_for_database_authentication email: params[:email]
 
     return invalid_login_attempt unless resource
+    return invalid_login_attempt unless resource.valid_password? params[:password]
 
-    if resource.valid_password? params[:user][:password]
-      sign_in 'user', resource
-      render json: { email: resource.email, authentication_token: resource.authentication_token }, status: 201
-      return
-    end
-
-    invalid_login_attempt
+    render json: { email: resource.email, auth_token: resource.authentication_token }, status: 201
+    return
   end
 
   def destroy
-    sign_out(resource_name)
+    user = User.find_by_authentication_token params[:auth_token]
+    user.authentication_token = SecureRandom.hex
 
-    render json: { }, status: 200
+    if user.save
+      render json: { }, status: 200
+    else
+      render json: { errors: ['Authentication token has not been updated'] }, status: 401
+    end
   end
 
 
 protected
 
-  def ensure_params_exist
-    return unless params[:user].blank?
-    render json: { errors: { messages: ['Missing user parameter'] } }, status: 422
-  end
-
   def invalid_login_attempt
     warden.custom_failure!
 
-    render json: { errors: { messages: ['Error with your email or password'] } }, status: 401
+    render json: { errors: ['Error with your email or password'] }, status: 401
   end
 end

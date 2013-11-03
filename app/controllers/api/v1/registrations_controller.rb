@@ -6,11 +6,11 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
     user = User.new safe_params
 
     if user.save
-      render json: { email: user.email, authentication_token: user.authentication_token }, status: 201
+      render json: { email: user.email, auth_token: user.authentication_token }, status: 201
       return
     else
       warden.custom_failure!
-      render json: user.errors, status: 422
+      render json: { errors: user.errors }, status: 422
     end
   end
 
