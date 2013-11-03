@@ -11,7 +11,7 @@ class Api::V1::SessionsController < DeviseController
 
     if resource.valid_password? params[:user][:password]
       sign_in 'user', resource
-      render json: { success: true }, status: 201
+      render json: { email: resource.email, authentication_token: resource.authentication_token }, status: 201
       return
     end
 
@@ -21,7 +21,7 @@ class Api::V1::SessionsController < DeviseController
   def destroy
     sign_out(resource_name)
 
-    render json: { success: true }
+    render json: { }, status: 200
   end
 
 
@@ -29,12 +29,12 @@ protected
 
   def ensure_params_exist
     return unless params[:user].blank?
-    render json: {success: false, message: 'Missing user parameter'}, status: 422
+    render json: { errors: { messages: ['Missing user parameter'] } }, status: 422
   end
 
   def invalid_login_attempt
     warden.custom_failure!
 
-    render json: { success: false, message: 'Error with your email or password' }, status: 401
+    render json: { errors: { messages: ['Error with your email or password'] } }, status: 401
   end
 end
