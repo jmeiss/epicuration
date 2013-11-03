@@ -14,7 +14,7 @@ describe Api::V1::SessionsController do
         before { post sign_in_uri, user: { email: user.email, password: user.password } }
 
         it { expect(response.status).to eq 201 }
-        it { expect(response_json['authentication_token']).to eq user.authentication_token }
+        it { expect(json_response['authentication_token']).to eq user.authentication_token }
       end
 
       context 'sign_in user with wrong password' do

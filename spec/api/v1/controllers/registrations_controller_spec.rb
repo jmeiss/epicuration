@@ -12,8 +12,8 @@ describe Api::V1::RegistrationsController do
       before { post sign_up_uri, user: user }
 
       it { expect(response.status).to eq 201 }
-      it { expect(response_json['email']).to eq user[:email] }
-      it { expect(response_json['authentication_token'].length).to eq 32 }
+      it { expect(json_response['email']).to eq user[:email] }
+      it { expect(json_response['authentication_token'].length).to eq 32 }
     end
 
     context 'create user' do
