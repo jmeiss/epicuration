@@ -44,6 +44,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'activerecord-session_store'
 gem 'devise', '3.1.1'
 gem 'omniauth', '1.1.4'
 gem 'omniauth-facebook', '1.4.1'
@@ -57,16 +58,17 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.14.0'
-  gem 'guard-rspec', '4.0.3'
-  gem 'guard-livereload', '2.0.0'
-  gem 'spork-rails'
-  gem 'guard-spork', '1.5.1'
   gem 'childprocess', '0.3.9'
+  gem 'guard-livereload', '2.0.0'
+  gem 'guard-rspec', '4.0.3'
+  gem 'guard-spork', '1.5.1'
+  gem 'json_spec', '1.1.1'
+  gem 'rspec-rails', '~> 2.14.0'
+  gem 'spork-rails'
 end
 
 group :test do
-  gem 'selenium-webdriver', '~> 2.35.1'
   gem 'capybara', '2.1.0'
   gem 'factory_girl_rails', '4.2.1'
+  gem 'selenium-webdriver', '~> 2.35.1'
 end
